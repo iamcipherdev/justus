@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>JustUs — sirf hum dono</title>
+<meta name="theme-color" content="#14101f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+</head>
+<body>
+
+<!-- ══════════ PRIVACY VEIL (app hidden hone par blur) ══════════ -->
+<div id="veil" class="hidden">
+  <div class="veil-card">
+    <div class="veil-emoji">👀</div>
+    <p>wapis aane ke liye tap karo</p>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN: PIN LOCK ══════════ -->
+<section id="screen-lock" class="screen active">
+  <div class="lock-wrap">
+    <div class="logo">💞</div>
+    <h1>JustUs</h1>
+    <p class="sub" id="lock-sub">apna secret PIN banao</p>
+    <div class="pin-dots" id="pin-dots">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="pin-pad" id="pin-pad">
+      <button>1</button><button>2</button><button>3</button>
+      <button>4</button><button>5</button><button>6</button>
+      <button>7</button><button>8</button><button>9</button>
+      <button class="pin-fn" data-fn="clear">⌫</button><button>0</button><button class="pin-fn" data-fn="ok">✓</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SCREEN: PAIRING ══════════ -->
+<section id="screen-pair" class="screen">
+  <div class="pair-wrap">
+    <div class="logo">💞</div>
+    <h1>JustUs</h1>
+    <p class="sub">sirf hum dono ke liye</p>
+    <div class="pair-card">
+      <button id="btn-create" class="btn-primary">🔑 Secret code banao</button>
+      <div class="or">— ya —</div>
+      <input id="join-code" maxlength="6" placeholder="code likho" autocomplete="off" autocapitalize="characters">
+      <button id="btn-join" class="btn-ghost">Join karo →</button>
+    </div>
+    <div id="my-code-box" class="hidden">
+      <p class="sub">ye code apne partner ko bhejo:</p>
+      <div id="my-code">------</div>
+      <p class="waiting"><span class="pulse-dot"></span> partner ka intezar...</p>
+    </div>
+    <p id="pair-error" class="error hidden"></p>
+    <p class="hint">💡 dono ko yehi app kholni hai — ek code banayega, dusra join karega</p>
+  </div>
+</section>
+
+<!-- ══════════ SCREEN: CHAT ══════════ -->
+<section id="screen-chat" class="screen">
+  <header class="chat-head">
+    <div class="peer-info">
+      <span id="online-dot" class="dot offline"></span>
+      <div>
+        <div class="peer-name">💖 My Person</div>
+        <div id="peer-status" class="peer-status">connecting...</div>
+      </div>
+    </div>
+    <div class="head-btns">
+      <button id="btn-voice" class="icon-btn" title="Voice call">📞</button>
+      <button id="btn-video" class="icon-btn" title="Video call">🎥</button>
+      <button id="btn-locknow" class="icon-btn" title="Lock">🔒</button>
+    </div>
+  </header>
+
+  <div id="burn-bar">
+    <span>🔥 disappearing:</span>
+    <div class="burn-opts">
+      <button data-ms="0" class="on">off</button>
+      <button data-ms="10000">10s</button>
+      <button data-ms="60000">1m</button>
+      <button data-ms="3600000">1h</button>
+    </div>
+  </div>
+
+  <main id="messages"></main>
+  <div id="typing" class="hidden">likh raha hai... ✍️</div>
+
+  <footer class="chat-foot">
+    <input type="file" id="img-input" accept="image/*" class="hidden">
+    <button id="btn-img" class="icon-btn" title="View-once photo">📷</button>
+    <input id="msg-input" placeholder="kuch pyara likho..." autocomplete="off">
+    <button id="btn-send" class="icon-btn send">➤</button>
+  </footer>
+</section>
+
+<!-- ══════════ SCREEN: CALL ══════════ -->
+<section id="screen-call" class="screen">
+  <video id="remote-video" autoplay playsinline></video>
+  <div id="voice-avatar" class="hidden">
+    <div class="va-ring"></div>
+    <div class="va-emoji">💞</div>
+    <p id="voice-label">connecting...</p>
+  </div>
+  <video id="local-video" autoplay playsinline muted></video>
+  <div class="call-controls">
+    <button id="btn-mute" class="icon-btn">🎤</button>
+    <button id="btn-flip" class="icon-btn">🔄</button>
+    <button id="btn-end" class="icon-btn end">📵</button>
+  </div>
+  <p id="call-status" class="call-status">connecting...</p>
+</section>
+
+<!-- ══════════ INCOMING CALL MODAL ══════════ -->
+<div id="incoming" class="hidden">
+  <div class="inc-card">
+    <div class="logo">💞</div>
+    <h2 id="inc-title">Video call aa rahi hai...</h2>
+    <div class="inc-btns">
+      <button id="btn-decline" class="icon-btn end">📵</button>
+      <button id="btn-accept" class="icon-btn accept">📞</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
